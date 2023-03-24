@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const Recipes = require('./models/recipes');

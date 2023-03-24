@@ -108,6 +108,31 @@ footer {
 	height: 1000px;
 	overflow: hidden;
 }
+#searchButton{
+	border-color: #1A7C7A;
+	position: relative;
+	transform: translateY(80%);
+	left: 43%;
+	margin: -600px;
+	font-size: 20px;
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-width: 2px;
+}
+#createButton{
+	border-color: #1A7C7A;
+	position: relative;
+	left: 92%;
+	top: 3%;
+	/* transform: translateY(180%); */
+	margin: -50px;
+	font-size: 20px;
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-width: 2px;
+}
 section {
 	padding-left: .5em;
 	padding-right: .5em;
