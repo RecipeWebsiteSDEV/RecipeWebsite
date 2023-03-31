@@ -14,7 +14,7 @@ mongoose.connect(dbURI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then((result) => app.listen(3000))
+    .then((result) => server.listen(3000))
     .catch((err) => console.log(err))
 module.exports = mongoose;
 
@@ -29,10 +29,24 @@ server.use(express.urlencoded({
 
 // Home page
 server.get('/', (req, res) => {
-    res.render('home', {
-        title: "Home"
-    })
+    // res.render('home', {
+    //     title: "Home"
+    // })
+    res.redirect('/recipes');
 });
+
+server.get('/recipes', (req, res) => {
+    Recipes.find().sort({ createdAt: -1 })
+        .then((result) => {
+            res.render('home', {
+                title: 'Recipes',
+                recipes: result
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
 
 // Login page
 server.get('/login', (req, res) => {

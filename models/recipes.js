@@ -27,18 +27,7 @@ const recipesSchema = new Schema({
         type: String,
         required: true
     },
-
-	// ingredients needs to be an array, but not sure if the representation below works for that.
-    ingredients: [{
-        name: {
-            type: String,
-            required: true
-        },
-        amount: {
-            type: String,
-            required: true
-        }
-    }]
+    ingredients: [{ type: String }]
 }, { timestamps: true });
 
 // model

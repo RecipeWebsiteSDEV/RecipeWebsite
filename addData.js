@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 // Replace the uri string with your MongoDB deployment's connection string.
 const uri =
-  "mongodb+srv://<username>:<password>@recipewebsite.mtdlxim.mongodb.net/test";
+  "mongodb+srv://cookbook:ewGCqomfmL0KHfAe@recipewebsite.ntoveeo.mongodb.net/WebsiteDB?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 // This is the function that adds data
