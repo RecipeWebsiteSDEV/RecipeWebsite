@@ -2,7 +2,7 @@
 
 	<body>
 		<%- include('./partials/pages.ejs') %>
-		<div id="bigimage">
+		<div id="bigimage"></div>
 		<button id="createButton">Create Recipe</button>
 			<div class="search">
 				<button id="searchButton" onclick="displayCheckedIngredients()">Search</button>
@@ -47,11 +47,10 @@
     <p>There are no recipes to display...</p>
     <% } %>
   </div>
-			</div>
-			<div id="wrapper">
-				<h2>Featured Dish Of Today</h2>
-				<h2>something something recipe here and image here</h2>
-			</div>
+		</div>
+		<div id="wrapper">
+			<h2>Featured Dish Of Today</h2>
+			<h2>something something recipe here and image here</h2>
 		</div>
 	<script>
 		function displayCheckedIngredients() {
@@ -80,6 +79,7 @@
 			}
 		}
 	</script>
+	
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
