@@ -7,11 +7,7 @@ const ingredientsSchema = new Schema({
         type: String,
         required: true
     },
-    potentialNames: {
-        type: [String],
-        required: false,
-        default: []
-    }
+    potentialNames: [{ type: String, required: false }]
 }, { timestamps: true });
 
 // model
