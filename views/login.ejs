@@ -2,5 +2,15 @@
 
   <body>
     <%- include('./partials/pages.ejs') %>
+      <div id="login">
+          <h2>Login</h2><br>
+          <form action=" ">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email..."><br><br>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter Password..." minlength="9"><br><br>
+            <input type="submit" value="Submit">
+          </form>
+      </div>
   </body>
 </html>
