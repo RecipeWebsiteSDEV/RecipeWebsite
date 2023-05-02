@@ -1,0 +1,91 @@
+<%- include('./partials/header.ejs') %>
+
+	<body>
+		<%- include('./partials/pages.ejs') %>
+		<div id="bigimage">
+		<button id="createButton">Create Recipe</button>
+			<div class="search">
+
+				<button id="searchButton" onclick="displayCheckedIngredients()">Search</button>
+				<input type="text" placeholder="Search...">
+				<h3>Common Ingredients</h3>
+				<form>
+					<input type="checkbox" id="ingredient1" name="ingredient1" value="PeanutOil">
+					<label for="ingredient1">Peanut Oil</label><br>
+					<input type="checkbox" id="ingredient2" name="ingredient2" value="Garlic">
+					<label for="ingredient2">Garlic</label><br>
+					<input type="checkbox" id="ingredient3" name="ingredient3" value="Rosemary">
+					<label for="ingredient3">Rosemary</label><br>
+				</form>
+
+				<div class="recipes-dropdown" id="recipes-dropdown">
+					<% if (recipes.length > 0) { %>
+					<% recipes.forEach((recipe, index) => { %>
+					<div class="accordion-item-<%= index %> ">
+					  <h2 class="accordion-header" id="flush-headingOne">
+						<button class="accordion-button collapsed-<%= index %>" type="button" data-bs-toggle="collapse"
+						  data-bs-target="#recipe-<%= index %>">
+						  <h3 class="name"><%= recipe.name %></h3>
+						</button>
+					  </h2>
+					  <div id="recipe-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#recipes">
+						<div class="accordion-body">
+							<p class="author">Author: <%= recipe.author %></p>
+							<p class="description">Description: <%= recipe.description %></p>
+							<p class="dishType">Dish Type: <%= recipe.dishType %></p>
+							<p class="difficulty">Difficulty: <%= recipe.difficulty %></p>
+							<p class="instructions">Instructions: <%= recipe.instructions %></p>
+							<p>Ingredients:</p>
+							<ul class="ingredients-<%= index %>">
+								<% for (let i = 0; i < recipe.ingredients.length; i++) { %>
+									<li class="ingredient-<%= i %>"><%= recipe.ingredients[i] %></li>
+								<% } %>
+							</ul>
+						</div>
+					  </div>
+					</div>
+					<% }) %>
+					<% } else { %>
+					<p>There are no recipes to display...</p>
+					<% } %>
+  </div>
+			</div>
+			<div id="wrapper">
+				<h2>Featured Dish Of Today</h2>
+				<h2>something something recipe here and image here</h2>
+			</div>
+		</div>
+	<script>
+
+		function displayCheckedIngredients() {
+			const commonIngredient1 = document.querySelector('input[name="ingredient1"]');
+			const commonIngredient2 = document.querySelector('input[name="ingredient2"]');
+			const commonIngredient3 = document.querySelector('input[name="ingredient3"]');
+			const recipesDropdown = document.getElementById("recipes-dropdown")
+			const recipes = recipesDropdown.querySelectorAll("button[class^='accordion-button collapsed-']")
+			let selectedIngredients = [];
+
+			if (commonIngredient1.checked) { selectedIngredients.push(commonIngredient1.value) };
+			if (commonIngredient2.checked) { selectedIngredients.push(commonIngredient2.value) };
+			if (commonIngredient3.checked) { selectedIngredients.push(commonIngredient3.value) };
+
+			// Changing colors based on the selected options for demo
+			if (selectedIngredients[0] == "PeanutOil") {
+				recipes[1].style.backgroundColor = "red";
+				recipes[4].style.backgroundColor = "red";
+			}
+			if (selectedIngredients[1] == "Garlic") {
+				recipes[0].style.backgroundColor = "yellow";
+			}
+			if (selectedIngredients[2] == "Rosemary") {
+				recipes[3].style.backgroundColor = "green";
+				recipes[2].style.backgroundColor = "green";
+			}
+		}
+	</script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</html>
