@@ -5,16 +5,21 @@
 		<div id="bigimage"></div>
 		<button id="createButton">Create Recipe</button>
 			<div class="search">
-				<button id="searchButton" onclick="displayCheckedIngredients()">Search</button>
+				<!-- <button id="searchButton">Search</button> -->
+				<!-- <form action="/test" method="POST">
+					<input name="give-me-a-name" type="text" />
+					<button type="submit">Send This Bad Boy To The Server</button>
+				</form> -->
 				<input type="text" placeholder="Search...">
 				<h3>Common Ingredients</h3>
-				<form>
-					<input type="checkbox" id="ingredient1" name="ingredient1" value="PeanutOil">
+				<form action="/" method="POST">
+					<input type="checkbox" id="ingredient1" name="ingredient1" value="Peanut oil">
 					<label for="ingredient1">Peanut Oil</label><br>
 					<input type="checkbox" id="ingredient2" name="ingredient2" value="Garlic">
 					<label for="ingredient2">Garlic</label><br>
 					<input type="checkbox" id="ingredient3" name="ingredient3" value="Rosemary">
 					<label for="ingredient3">Rosemary</label><br>
+					<button id="searchButton">Search</button>
 				</form>
   <div class="recipes-dropdown" id="recipes-dropdown">
     <% if (recipes.length > 0) { %>

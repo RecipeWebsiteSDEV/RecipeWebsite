@@ -35,6 +35,27 @@ server.get('/', (req, res) => {
     res.redirect('/recipes');
 });
 
+server.post("/", (req, res) => {
+    // console.log(req.body)
+    selectedIngredients = Object.values(req.body)
+    Recipes.find().sort({ createdAt: -1 })
+        .then((result) => {
+            result.forEach(recipe => {
+                selectedIngredients.forEach(selectedIngredient => {
+                    if(recipe.ingredients.includes(selectedIngredient)) {
+                        // send to home.ejs and change colors of dropdowns
+                        console.log(recipe.ingredients.length)
+                        // console.log(`${recipe.name} contains ${selectedIngredient}`)
+                    }
+                });
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    res.redirect('/recipes');
+})
+
 server.get('/recipes', (req, res) => {
     Recipes.find().sort({ createdAt: -1 })
         .then((result) => {
