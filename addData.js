@@ -1,7 +1,8 @@
 const { MongoClient } = require("mongodb");
+require('dotenv').config();
+
 // Replace the uri string with your MongoDB deployment's connection string.
-const uri =
-  "mongodb+srv://cookbook:ewGCqomfmL0KHfAe@recipewebsite.ntoveeo.mongodb.net/WebsiteDB?retryWrites=true&w=majority";
+const uri = process.env.MONGO_DB_URI;
 const client = new MongoClient(uri);
 
 // This is the function that adds data
@@ -10,10 +11,14 @@ async function run() {
     await client.connect();
     // database and collection code goes here
     const db = client.db("websiteDB");
-    const coll = db.collection("recipes");
+    const coll = db.collection("users");
     // insert code goes here
     const docs = [
         {
+            email: "mario@google.com",
+            password: "test123"
+        }
+        /* {
             name: "Pan-Seared Steak",
             author: "Phil Jacobs",
             description: "Pan-fried, butter-basted steak",
@@ -103,7 +108,7 @@ async function run() {
                 "Salt",
                 "Pepper"
             ]
-        }
+        } */
     ];
     const result = await coll.insertMany(docs);
     // display the results of your operation
