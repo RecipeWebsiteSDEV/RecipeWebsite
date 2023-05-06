@@ -8,6 +8,7 @@ require('dotenv').config();
 const Recipes = require('./models/recipes');
 const User = require('./models/User');
 const Ingredients = require('./models/ingredients');
+const { receiveMessageOnPort } = require('worker_threads');
 
 // express app
 const server = express();
@@ -80,33 +81,40 @@ server.post("/", (req, res) => {
 });
 
 server.get('/recipes', (req, res) => {
-    const recipeContains = JSON.parse(decodeURIComponent(req.query.recipeContains || 'null'));
-    Recipes.find().sort({
-            createdAt: -1
-        })
-        .then((result) => {
-            const uniqueIngredients = []
-            result.forEach(recipe => {
-                let index = 0
-                while (index < recipe.ingredients.length) {
-                    const ingredient = recipe.ingredients[index]
-                    if (!uniqueIngredients.includes(ingredient)) {
-                        uniqueIngredients.push(ingredient)
-                    }
-                    index++
-                }
-                uniqueIngredients.sort()
-            });
-            res.render('home', {
-                title: 'Recipes',
-                recipes: result,
-                uniqueIngredients: uniqueIngredients,
-                recipeContains: recipeContains,
-            })
-        })
-        .catch((err) => {
-            console.log(err);
+  let recipeContains;
+  Recipes.find().sort({ createdAt: -1 })
+    .then((result) => {
+      if (Object.keys(req.query).length === 0) {
+        const recipeContainsList = result.map(recipe => ({
+          name: recipe.name,
+          matchedIngredients: [],
+          recipeColor: "white"
+        }));
+        recipeContains = recipeContainsList;
+      } else {
+        recipeContains = JSON.parse(decodeURIComponent(req.query.recipeContains));
+      }
+      
+      const uniqueIngredients = [];
+      result.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+          if (!uniqueIngredients.includes(ingredient)) {
+            uniqueIngredients.push(ingredient);
+          }
         });
+      });
+      uniqueIngredients.sort();
+
+      res.render('home', {
+        title: 'Recipes',
+        recipes: result,
+        uniqueIngredients: uniqueIngredients,
+        recipeContains: recipeContains,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // Login page

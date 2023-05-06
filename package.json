@@ -14,12 +14,8 @@
     "mongoose": "^7.0.0",
     "morgan": "^1.10.0",
     "node": "^19.6.1",
-<<<<<<< HEAD
-    "nodemon": "^2.0.22"
-=======
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "validate": "^5.2.0",
     "validator": "^13.9.0"
->>>>>>> d9d947ea1c7390abb7f16ce232c6e85b23f28b3e
   }
 }
