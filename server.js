@@ -29,39 +29,65 @@ server.use(express.urlencoded({
 
 // Home page
 server.get('/', (req, res) => {
-    // res.render('home', {
-    //     title: "Home"
-    // })
     res.redirect('/recipes');
 });
 
 server.post("/", (req, res) => {
-    // console.log(req.body)
-    selectedIngredients = Object.values(req.body)
-    Recipes.find().sort({ createdAt: -1 })
-        .then((result) => {
-            result.forEach(recipe => {
-                selectedIngredients.forEach(selectedIngredient => {
-                    if(recipe.ingredients.includes(selectedIngredient)) {
-                        // send to home.ejs and change colors of dropdowns
-                        console.log(recipe.ingredients.length)
-                        // console.log(`${recipe.name} contains ${selectedIngredient}`)
-                    }
-                });
-            });
-        })
-        .catch((err) => {
-            console.log(err);
+  selectedIngredients = Object.values(req.body)
+  Recipes.find().sort({ createdAt: -1 })
+    .then((result) => {
+      const recipeContainsList = result.map(recipe => {
+        const recipeContains = {
+          "name": recipe.name,
+          "matchedIngredients": [],
+          "recipeColor": "red"
+        };
+        selectedIngredients.forEach(selectedIngredient => {
+          if (recipe.ingredients.includes(selectedIngredient)) {
+            recipeContains["matchedIngredients"].push(selectedIngredient);
+          }
         });
-    res.redirect('/recipes');
-})
+        const count = recipeContains["matchedIngredients"].length / recipe.ingredients.length;
+        if (count == 1) {
+          recipeContains["recipeColor"] = "green";
+        } else if (count > 0) {
+          recipeContains["recipeColor"] = "yellow";
+        } else if (count == 0) {
+          recipeContains["recipeColor"] = "red";
+        }
+        return recipeContains;
+      });
+      const encodedRecipeContains = encodeURIComponent(JSON.stringify(recipeContainsList));
+      res.redirect(`/recipes?recipeContains=${encodedRecipeContains}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 server.get('/recipes', (req, res) => {
-    Recipes.find().sort({ createdAt: -1 })
+    const recipeContains = JSON.parse(decodeURIComponent(req.query.recipeContains || 'null'));
+    Recipes.find().sort({
+            createdAt: -1
+        })
         .then((result) => {
+            const uniqueIngredients = []
+            result.forEach(recipe => {
+                let index = 0
+                while (index < recipe.ingredients.length) {
+                    const ingredient = recipe.ingredients[index]
+                    if (!uniqueIngredients.includes(ingredient)) {
+                        uniqueIngredients.push(ingredient)
+                    }
+                    index++
+                }
+                uniqueIngredients.sort()
+            });
             res.render('home', {
                 title: 'Recipes',
-                recipes: result
+                recipes: result,
+                uniqueIngredients: uniqueIngredients,
+                recipeContains: recipeContains,
             })
         })
         .catch((err) => {

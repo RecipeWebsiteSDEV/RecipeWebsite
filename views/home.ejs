@@ -5,33 +5,29 @@
 		<div id="bigimage"></div>
 		<button id="createButton">Create Recipe</button>
 			<div class="search">
-				<!-- <button id="searchButton">Search</button> -->
-				<!-- <form action="/test" method="POST">
-					<input name="give-me-a-name" type="text" />
-					<button type="submit">Send This Bad Boy To The Server</button>
-				</form> -->
 				<input type="text" placeholder="Search...">
 				<h3>Common Ingredients</h3>
 				<form action="/" method="POST">
-					<input type="checkbox" id="ingredient1" name="ingredient1" value="Peanut oil">
-					<label for="ingredient1">Peanut Oil</label><br>
-					<input type="checkbox" id="ingredient2" name="ingredient2" value="Garlic">
-					<label for="ingredient2">Garlic</label><br>
-					<input type="checkbox" id="ingredient3" name="ingredient3" value="Rosemary">
-					<label for="ingredient3">Rosemary</label><br>
+					<% if (uniqueIngredients.length > 0) { %>
+					<% uniqueIngredients.forEach((ingredient, index) => { %>
+						<input type="checkbox" id="ingredient-<%= index %>" name="ingredient<%= index %>" value="<%= ingredient %>">
+						<label for="ingredient-<%= index %>"><%= ingredient %></label><br>
+					<% }) %>
+					<% } else { %>
+					<p>There are no ingredients to display...</p>
+					<% } %>
 					<button id="searchButton">Search</button>
 				</form>
-  <div class="recipes-dropdown" id="recipes-dropdown">
     <% if (recipes.length > 0) { %>
     <% recipes.forEach((recipe, index) => { %>
     <div class="accordion-item-<%= index %> ">
       <h2 class="accordion-header" id="flush-headingOne">
         <button class="accordion-button collapsed-<%= index %>" type="button" data-bs-toggle="collapse"
-          data-bs-target="#recipe-<%= index %>">
+          data-bs-target="#recipe-<%= index %>" style="background-color:<%= recipeContains[index].recipeColor %>">
           <h3 class="name"><%= recipe.name %></h3>
         </button>
       </h2>
-      <div id="recipe-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#recipes">
+      <div id="recipe-<%= index %>" class="accordion-collapse collapse" data-bs-parent="#recipes" >
         <div class="accordion-body">
 			<p class="author">Author: <%= recipe.author %></p>
 			<p class="description">Description: <%= recipe.description %></p>
@@ -43,6 +39,7 @@
 				<% for (let i = 0; i < recipe.ingredients.length; i++) { %>
 					<li class="ingredient-<%= i %>"><%= recipe.ingredients[i] %></li>
 				<% } %>
+			
 			</ul>
         </div>
       </div>
@@ -52,39 +49,10 @@
     <p>There are no recipes to display...</p>
     <% } %>
   </div>
-		</div>
 		<div id="wrapper">
 			<h2>Featured Dish Of Today</h2>
 			<h2>something something recipe here and image here</h2>
 		</div>
-	<script>
-		function displayCheckedIngredients() {
-			const commonIngredient1 = document.querySelector('input[name="ingredient1"]');
-			const commonIngredient2 = document.querySelector('input[name="ingredient2"]');
-			const commonIngredient3 = document.querySelector('input[name="ingredient3"]');
-			const recipesDropdown = document.getElementById("recipes-dropdown")
-			console.log(recipesDropdown)
-			const recipes = recipesDropdown.querySelectorAll("button[class^='accordion-button collapsed-']")
-			let selectedIngredients = [];
-
-			if (commonIngredient1.checked) { selectedIngredients.push(commonIngredient1.value) };
-			if (commonIngredient2.checked) { selectedIngredients.push(commonIngredient2.value) };
-			if (commonIngredient3.checked) { selectedIngredients.push(commonIngredient3.value) };
-
-			// Changing colors based on the selected options for demo
-			if (selectedIngredients[0] == "PeanutOil") {
-				recipes[1].style.backgroundColor = "red";
-				recipes[4].style.backgroundColor = "red";
-			}
-			if (selectedIngredients[1] == "Garlic") {
-				recipes[0].style.backgroundColor = "yellow";
-			}
-			if (selectedIngredients[2] == "Rosemary") {
-				recipes[3].style.backgroundColor = "green";
-				recipes[2].style.backgroundColor = "green";
-			}
-		}
-	</script>
 	
 </body>
 
