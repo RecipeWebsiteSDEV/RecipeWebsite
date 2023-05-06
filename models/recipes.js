@@ -27,7 +27,7 @@ const recipesSchema = new Schema({
         type: String,
         required: true
     },
-    ingredients: [{ type: String , required: true }]
+    ingredients: [{ type: String }]
 }, { timestamps: true });
 
 // model
