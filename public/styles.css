@@ -169,6 +169,13 @@ input[type='checkbox'] {
 	height: 1em;
 	width: 1em;
 }
+.name {
+	width: 25em;
+}
+.percentage {
+	display:flex;
+	margin-left: 53%;
+}
 th {
 	padding: 0.8em;
 }
@@ -180,6 +187,10 @@ input{
 	border: 2px solid;
 	display: block;
 	font-size: 22px;
+}
+h2 {
+	font-size: 3em;
+	font-style: bold;
 }
 .item1{ grid-area: RecipeName;}
 .item2{ grid-area: Author;}

@@ -54,19 +54,20 @@ server.post("/", (req, res) => {
         const recipeContains = {
           "name": recipe.name,
           "matchedIngredients": [],
-          "recipeColor": "red"
+          "matchPercentage": 0,
+          "recipeColor": "red",
         };
         selectedIngredients.forEach(selectedIngredient => {
           if (recipe.ingredients.includes(selectedIngredient)) {
             recipeContains["matchedIngredients"].push(selectedIngredient);
           }
         });
-        const count = recipeContains["matchedIngredients"].length / recipe.ingredients.length;
-        if (count == 1) {
+        recipeContains["matchPercentage"] = recipeContains["matchedIngredients"].length / recipe.ingredients.length;
+        if (recipeContains["matchPercentage"] == 1) {
           recipeContains["recipeColor"] = "green";
-        } else if (count > 0) {
+        } else if (recipeContains["matchPercentage"] > 0) {
           recipeContains["recipeColor"] = "yellow";
-        } else if (count == 0) {
+        } else if (recipeContains["matchPercentage"] == 0) {
           recipeContains["recipeColor"] = "red";
         }
         return recipeContains;
