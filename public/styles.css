@@ -136,10 +136,6 @@ footer {
 }
 #searchButton{
 	border-color: #1A7C7A;
-	position: relative;
-	transform: translateY(80%);
-	left: 43%;
-	margin: -600px;
 	font-size: 20px;
 	padding: 10px;
 	padding-left: 15px;
@@ -151,13 +147,30 @@ footer {
 	position: relative;
 	left: 92%;
 	top: 3%;
-	/* transform: translateY(180%); */
 	margin: -50px;
 	font-size: 20px;
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
 	border-width: 2px;
+}
+.checkboxes{
+	font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+}
+.checkbox-labels {
+	text-align: center;
+	width: 10em;
+}
+input[type='checkbox'] {
+    margin-left: auto;
+    margin-right: auto;
+	height: 1em;
+	width: 1em;
+}
+th {
+	padding: 0.8em;
 }
 section {
 	padding-left: .5em;

@@ -9,6 +9,10 @@
 				<h3>Common Ingredients</h3>
 				<form action="/" method="POST">
 					<% if (uniqueIngredients.length > 0) { %>
+						<% if (!(uniqueIngredients.length + 1) % 5 === 0) { %>
+							<% console.log(uniqueIngredients.length + 1) %>
+							<% for i in range(0,5) %>
+							<% } %>
 						<% for (var index = 0; index < uniqueIngredients.length; index += 5) { %>
 							<table class="checkboxes">
 								<tr>
@@ -34,6 +38,8 @@
 									</th>
 								</tr>
 							</table>
+							<script> document.getElementById("ingredient-29").style.display = "none"; </script>
+							<script> document.getElementById("ingredient-29-checkbox").style.display = "none"; </script>
 						<% } %>
 					<% } else { %>
 					<p>There are no ingredients to display...</p>

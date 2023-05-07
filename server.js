@@ -7,7 +7,6 @@ const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 require('dotenv').config();
 const Recipes = require('./models/recipes');
 const User = require('./models/User');
-const Ingredients = require('./models/ingredients');
 const { receiveMessageOnPort } = require('worker_threads');
 
 // express app
@@ -24,7 +23,7 @@ mongoose.connect(dbURI, {
         useUnifiedTopology: true
         
     })
-    .then((result) => server.listen(3000))
+    .then((result) => server.listen(3001))
     .catch((err) => console.log(err))
     console.log("Connected")
 module.exports = mongoose;
