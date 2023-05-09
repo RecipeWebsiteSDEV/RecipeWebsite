@@ -6,7 +6,7 @@ const requireAuth = (req, res, next) => {
 
     // Check json web token exists and is verified
     if (token) {
-        jwt.verify(token, 'super secret', (err, decodedToken) => {
+        jwt.verify(token, 'secret_key', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.redirect('/login');
@@ -26,7 +26,7 @@ const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
 
     if (token) {
-        jwt.verify(token, 'super secret', async (err, decodedToken) => {
+        jwt.verify(token, 'secret_key', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.locals.user = null;

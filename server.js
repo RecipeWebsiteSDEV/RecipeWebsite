@@ -12,11 +12,6 @@ const { receiveMessageOnPort } = require('worker_threads');
 // express app
 const server = express();
 
-// middleware
-/* app.use(express.static('public'));
-app.use(express.json());
-app.use(cookieParser()); */
-
 const dbURI = process.env.MONGO_DB_URI;
 mongoose.connect(dbURI, {
         useNewUrlParser: true,
