@@ -147,6 +147,8 @@ server.get('/about', (req, res) => {
     })
 });
 
+server.get('/create.ejs', requireAuth, (req, res) => res.render('create'));
+
 // 404 page 
 server.use((req, res) => {
     res.status(404).render('404', {
