@@ -126,13 +126,6 @@ server.get('/signup', (req, res) => {
     })
 });
 
-// Profile page
-server.get('/profile', (req, res) => {
-    res.render('profile', {
-        title: "Profile"
-    })
-});
-
 // HowTo page
 server.get('/howTo', (req, res) => {
     res.render('howTo', {
@@ -147,7 +140,11 @@ server.get('/about', (req, res) => {
     })
 });
 
-server.get('/create.ejs', requireAuth, (req, res) => res.render('create'));
+// Profile page redirects to login if not logged in
+server.get('/profile', requireAuth, (req, res) => res.render('profile'));
+
+// Create Recipes page redirects to login if not logged in
+server.get('/create', requireAuth, (req, res) => res.render('create'));
 
 // 404 page 
 server.use((req, res) => {
