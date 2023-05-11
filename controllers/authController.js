@@ -1,6 +1,10 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+function Redirect() {
+    location.assign("./views/home.ejs")
+};
+
 // Handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
@@ -60,11 +64,11 @@ module.exports.signup_post = async (req, res) => {
         const user = await User.create({ email, password });
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(201).json({ user: user._id });
+        return res.status(201).json({ user: user._id });
     }
     catch (err) {
         const errors = handleErrors(err);
-        res.status(800).json({ errors });
+        return res.status(800).json({ errors });
     }
 }
 
@@ -77,10 +81,8 @@ module.exports.login_post = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
         res.status(200).json({ user: user._id });
     } catch (err) {
-        
         const errors = handleErrors(err);
         res.status(400).json({ errors });
-
     }
 }
 
