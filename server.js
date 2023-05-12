@@ -386,5 +386,6 @@ server.use((req, res) => {
   });
 });
 
-server.listen(process.env.PORT || 3000,
-() => Console.LOG("Sever is running..."));
+server.listen(3000, "localhost", () => {
+  console.log("listening for requests on port 3000");
+});
