@@ -21,6 +21,7 @@ header a:visited {
 header a:hover {
 	color: lightblue;
 }
+
 h1 {
 	background-color: #7C1A1B;
 	color: #FFFFFF;
@@ -80,6 +81,12 @@ h2 {
 h3 {
 	color:black;
 	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+li {
+	list-style-type: none;
+	text-align: center;
+	/* border: 1px solid black; */
+	width: 98%;
 }
 footer {
 	font-size: .70em;
@@ -146,15 +153,26 @@ footer {
 	border-width: 2px;
 }
 #createButton{
-	border-color: #1A7C7A;
+	color: black;
 	position: relative;
-	left: 92%;
-	top: 3%;
+	text-decoration: none;
 	margin: -50px;
+	font-size: 30px;
+	border-width: 2px;
+}
+#createButton:hover {
+	color: #1A7C7A;
+}
+#createRecipeButton{
+	border-color: #1A7C7A;
+	display:flex;
+	margin-left: auto;
+	margin-right: auto;
 	font-size: 20px;
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
+	padding-top: 10px;
 	border-width: 2px;
 }
 .checkboxes{
@@ -172,12 +190,14 @@ input[type='checkbox'] {
 	height: 1em;
 	width: 1em;
 }
-.name {
-	width: 25em;
-}
 .percentage {
 	display:flex;
 	margin-left: 53%;
+}
+.accountInputs, .checkboxInputs{
+	border: 2px solid;
+	display: block;
+	font-size: 22px;
 }
 th {
 	padding: 0.8em;
@@ -186,33 +206,20 @@ section {
 	padding-left: .5em;
 	padding-right: .5em;
 }
-input{
-	border: 2px solid;
-	display: block;
-	font-size: 22px;
-}
 h2 {
 	font-size: 3em;
 	font-style: bold;
 }
-.item1{ grid-area: RecipeName;}
-.item2{ grid-area: Author;}
-.item3{ grid-area: Description;}
-.item4{ grid-area: DishType;}
-.item5{ grid-area: instructions;}
-.item6{ grid-area: Difficulty;}
-.item7{ grid-area: ingredients;}
+.name{ 
+	width: 25em;
+}
+.profileName{ 
+	margin-left: auto;
+	margin-right: auto;
+	width: 25em;
+}
 .recipe {
-	display: grid;
-	grid-template-areas: 
-	'RecipeName RecipeName RecipeName RecipeName RecipeName'
-	'Author Description Description Description Description'
-	'DishType instructions instructions instructions instructions'
-	'Difficulty ingredients ingredients ingredients ingredients';
-	gap: 10px;
-	background-color: #1A7C7A;
-	padding: 10px;
-	
+	border: 1px solid#1A7C7A;
 }
 .recipe > div {
 	background-color: white;
@@ -233,7 +240,7 @@ h2 {
 	border-width: 20px;
 	border-style:inset;
 }
-.search {
+.search{
 	display: block;
 	position: relative;
 	background-color: white;
@@ -246,6 +253,26 @@ h2 {
 	border: #1A7C7A;
 	border-width: 20px;
 	border-style: inset;
+}
+.updateButton, .deleteButton {
+	display: block;
+	position: relative;
+	background-color: white;
+	text-align: center;
+	padding: 10px;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 15%;
+	border: #1A7C7A;
+	border-width: 5px;
+	border-style: inset;
+}
+.updateButton:hover {
+	background-color: limegreen;
+}
+.deleteButton:hover {
+	background-color: crimson;
 }
 .search input[type=text]{
 	margin: auto;
@@ -270,6 +297,18 @@ h2 {
 .descriptionlist {
 	text-align: left;
 	grid-area: list;
+}
+.entryBox {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	size: 0.5em;
+	font-size: 20px;
+	width: 25em;
+}
+.createLabels{ 
+	font-size: 2em;
+	font-style: bold;
 }
 #mobile {
 	display: inline;

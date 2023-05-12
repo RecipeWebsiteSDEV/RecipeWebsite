@@ -1,0 +1,64 @@
+<%- include('./partials/header.ejs') %>
+
+  <body>
+    <%- include('./partials/pages.ejs') %>
+    <div id="wrapper">
+        <h2>Update Recipe</h2>
+        <form action="/update/<%= recipe._id %>" method="POST">
+			<label for="name" class="createLabels">Recipe Name:</label>
+			<input type="text" name="name" id="name" class="entryBox" placeholder="Enter Recipe Name" value="<%= recipe.name %>" required>
+
+			<label for="description" class="createLabels">Description:</label>
+			<input type="text" name="description" id="description" class="entryBox" placeholder="Enter Recipe Description" value="<%= recipe.description %>">
+
+			<label for="dishType" class="createLabels">Dish Type:</label>
+			<input type="text" name="dishType" id="dishType" class="entryBox" placeholder="Enter Dish Type" value="<%= recipe.dishType %>" required>
+
+			<label for="difficulty" class="createLabels">Difficulty:</label>
+			<input type="text" name="difficulty" id="difficulty" class="entryBox" placeholder="Enter Recipe Difficulty" value="<%= recipe.difficulty %>" required>
+
+			<label for="instructions" class="createLabels">Instructions:</label>
+			<input type="text" name="instructions" id="instructions" class="entryBox" placeholder="Enter Instructions" value="<%= recipe.instructions %>" required>
+
+			<label for="ingredients" class="createLabels">Ingredients:</label>
+
+					<% if (uniqueIngredients.length > 0) { %>
+						<table class="checkboxes">
+						<% const columnsCount = 5 %>
+						<% if (!uniqueIngredients.length % columnsCount === 0) { %>
+							<% uniqueIngredientsLength = uniqueIngredients.length %>
+							<% totalElements = uniqueIngredients.length + columnsCount - (uniqueIngredients.length % columnsCount) %>
+						<% } %>
+						<% for (var index = 0; index < uniqueIngredients.length; index += columnsCount) { %>
+							<tr>
+								<% for (var i = 0; i < columnsCount; i++) { %>
+								<% const ingredientIndex = index + i; %>
+								<% const ingredient = uniqueIngredients[ingredientIndex]; %>
+								<th>
+									<label class="checkbox-labels" id="ingredient-<%= ingredientIndex %>"><%= ingredient %></label><br>
+									<input type="checkbox" id="ingredient-<%= ingredientIndex %>-checkbox" name="ingredients" class="checkboxInputs" value="<%= ingredient %>" <% if (recipe.ingredients.includes(ingredient)) { %>checked<% } %>>
+								</th>
+								<% } %>
+							</tr>
+							<% } %>
+							</table>
+					<% } else { %>
+					<p>There are no ingredients to display...</p>
+					<% } %>
+          <input type="text" name="newIngredients" id="Ingredients" class="entryBox" placeholder="Enter New Ingredients (seperated by commas)">
+					<div class="filler"></div>
+					<button id="createRecipeButton">Update Recipe</button>
+        </form>
+    </div>
+  </body>
+
+<script> 
+uniqueIngredientsLength = <%= uniqueIngredientsLength %>;
+totalElements = <%= totalElements %>;
+for (let i = uniqueIngredientsLength; i < totalElements; i++) {
+	document.getElementById(`ingredient-${i}`).style.display = "none";
+	document.getElementById(`ingredient-${i}-checkbox`).style.display = "none";
+}
+</script>
+
+</html>

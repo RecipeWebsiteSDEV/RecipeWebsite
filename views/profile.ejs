@@ -10,18 +10,26 @@
         </script>
         <h2>Welcome, User</h2>
         
-        <h3>Bio</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu scelerisque felis imperdiet proin fermentum leo. Nisl condimentum id venenatis a condimentum. Ipsum suspendisse ultrices gravida dictum. Duis at consectetur lorem donec massa sapien faucibus et molestie. Sed tempus urna et pharetra pharetra. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros.</p>
         <h3>My Recipes</h3>
+        <% recipes.forEach((recipe, index) => { %>
         <div class="recipe">
-            <div class="item1">Pan-Seared Steak</div>
-            <div class="item2">Phil Jacobs</div>
-            <div class="item3">Pan-fried, butter-basted steak</div>
-            <div class="item4">Type of dish: Entree</div>
-            <div class="item5">Heat pan very hot. Add oil to the pan. Cook the first side for about 2 min. Flip, wait 30 seconds and add butter, crushed garlic, thyme and rosemary. Once butter is melted, baste until finished cooking. Take off and allow it to rest.</div>
-            <div class="item6">Difficulty: Medium</div>
-            <div class="item7">"Steak", "Garlic", "Butter", "Neautral oil", "Rosemary", "Thyme", "Salt", "Pepper"</div>
+            <div class="profileName">Recipe Name:<%= recipe.name %></div>
+            <div class="author">Author:<%= recipe.author %></div>
+            <div class="description">Description:<%= recipe.description %></div>
+            <div class="dishType">Dish Type:<%= recipe.dishType %></div>
+            <div class="difficulty">Difficulty:<%= recipe.difficulty %></div>
+            <div class="Instructions`">Instructions:<%= recipe.instructions %></div>
+			<p>Ingredients:</p>
+			<ul class="ingredients-<%= index %>">
+				<% for (let i = 0; i < recipe.ingredients.length; i++) { %>
+					<li class="ingredient-<%= i %>"><%= recipe.ingredients[i] %></li>
+				<% } %>
+			</ul>
+            <a class="updateButton" id="update-<%= recipe.name %>"href="./update/<%= recipe._id %>">Update</a>
+            <a class="deleteButton" id="delete-<%= recipe.name %>" href="./delete/<%= recipe._id %>">Delete</a>
+
         </div>
+    <% }) %>
     </div>
 </body>
 

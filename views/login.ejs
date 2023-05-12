@@ -6,10 +6,10 @@
           <h2>Login</h2><br>
           <form action=" ">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter Email...">
+            <input type="email" id="email" name="email" class="accountInputs" placeholder="Enter Email...">
             <div class="email error"></div><br><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter Password..." minlength="7">
+            <input type="password" id="password" name="password" class="accountInputs" placeholder="Enter Password..." minlength="7">
             <div class="password error"></div><br><br>
             <input type="submit" value="Submit">
           </form>
@@ -39,7 +39,7 @@
                 headers: { 'Content-Type': 'application/json' }
             });
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             if (data.errors) {
                 emailError.textContent = data.errors.email;
                 passwordError.textContent = data.errors.password;
