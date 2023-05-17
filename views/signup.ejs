@@ -6,12 +6,12 @@
         <form action="'/signup">
             <h2>Sign up</h2><br>
             <label for="email">Email:</label>
-            <input type="text" name="email" class="accountInputs" required placeholder="Enter email...">
+            <input type="text" name="email" class="accountInputs" required placeholder="Enter Email...">
             <div class="email error"></div><br><br>
             <label for="password">Password:</label>
-            <input type="password" name="password" class="accountInputs" required placeholder="Enter password...">
+            <input type="password" name="password" class="accountInputs" required placeholder="Enter Password...">
             <div class="password error"></div><br><br>
-            <button>Sign up</button>
+            <input type="submit" value="Sign Up">
         </form>
     </div>
 </body>
@@ -39,7 +39,6 @@
                 headers: { 'Content-Type': 'application/json' }
             });
             const data = await res.json();
-            // console.log(data);
 
             if (data.errors) {
                 emailError.textContent = data.errors.email;
