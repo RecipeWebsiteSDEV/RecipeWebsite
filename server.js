@@ -322,12 +322,21 @@ server.post("/create", checkUser, (req, res) => {
           }
         });
       });
+
       uniqueIngredients.sort();
 
       let ingredientsList = [];
+      if (req.body.ingredients && req.body.ingredients.length !== 0) {
+        if (typeof req.body.ingredients == "string") {
+          ingredientsList.push(req.body.ingredients);
+        } else {
+          req.body.ingredients.forEach((ingredient) => {
+            ingredientsList.push(ingredient);
+          });
+        }
+      }
 
-      if (req.body.newIngredients.length !== 0) {
-        ingredientsList.push(req.body.ingredients)
+      if (req.body.newIngredients && req.body.newIngredients.length !== 0) {
         const rawNewIngredients = req.body.newIngredients.split(",");
         rawNewIngredients.forEach((newIngredient) => {
           const trimmedIngredient = newIngredient.trim();
@@ -345,31 +354,37 @@ server.post("/create", checkUser, (req, res) => {
       User.findById(userId)
         .sort({ createdAt: -1 })
         .then((result) => {
-          const username = result.email
+          const username = result.email;
 
-      const newRecipeInfo = {
-        name: req.body.name,
-        author: username,
-        description: req.body.description,
-        dishType: req.body.dishType,
-        difficulty: req.body.difficulty,
-        instructions: req.body.instructions,
-        ingredients: ingredientsList,
-      };
+          const newRecipeInfo = {
+            name: req.body.name,
+            author: username,
+            description: req.body.description,
+            dishType: req.body.dishType,
+            difficulty: req.body.difficulty,
+            instructions: req.body.instructions,
+            ingredients: ingredientsList,
+          };
 
-      const newRecipe = new Recipes(newRecipeInfo);
-      newRecipe
-        .save()
-        .then((result) => {
-          res.redirect("/");
+          const newRecipe = new Recipes(newRecipeInfo);
+          newRecipe
+            .save()
+            .then((result) => {
+              res.redirect("/");
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({
+                error: "An error occurred while creating the recipe.",
+              });
+            });
         })
         .catch((err) => {
           console.log(err);
           res.status(500).json({
-            error: "An error occurred while creating the recipe.",
-          })
+            error: "An error occurred while fetching user information.",
+          });
         });
-      });
     })
     .catch((err) => {
       console.log(err);
