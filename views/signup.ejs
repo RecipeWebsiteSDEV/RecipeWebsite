@@ -2,15 +2,15 @@
 
 <body>
     <%- include('./partials/pages.ejs') %>
-    <div class="search">
+    <div id="login">
         <form action="'/signup">
-            <h2>Sign up</h2>
-            <label for="email">Email</label>
-            <input type="text" name="email" class="accountInputs" required>
-            <div class="email error"></div>
-            <label for="password">Password</label>
-            <input type="password" name="password" class="accountInputs" required>
-            <div class="password error"></div>
+            <h2>Sign up</h2><br>
+            <label for="email">Email:</label>
+            <input type="text" name="email" class="accountInputs" required placeholder="Enter email...">
+            <div class="email error"></div><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="accountInputs" required placeholder="Enter password...">
+            <div class="password error"></div><br><br>
             <button>Sign up</button>
         </form>
     </div>
